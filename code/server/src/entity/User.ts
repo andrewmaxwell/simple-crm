@@ -16,4 +16,7 @@ export class User {
 
     @Column()
     phoneNumber: string;
+
+    @Column()
+    notes: string;
 }

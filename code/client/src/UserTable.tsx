@@ -15,7 +15,7 @@ import { useNavigate } from "react-router";
 
 const bold = { fontWeight: "bold" };
 
-export const Users: React.FC = () => {
+export const UserTable: React.FC = () => {
     const users = useUserList();
     const navigate = useNavigate();
     return (
@@ -45,6 +45,7 @@ export const Users: React.FC = () => {
                         <TableCell sx={bold}>Last Name</TableCell>
                         <TableCell sx={bold}>Age</TableCell>
                         <TableCell sx={bold}>Phone Number</TableCell>
+                        <TableCell sx={bold}>Notes</TableCell>
                         <TableCell sx={bold}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
@@ -55,6 +56,7 @@ export const Users: React.FC = () => {
                             <TableCell>{user.lastName}</TableCell>
                             <TableCell>{user.age}</TableCell>
                             <TableCell>{user.phoneNumber}</TableCell>
+                            <TableCell>{user.notes}</TableCell>
                             <TableCell>
                                 <Button
                                     variant="contained"

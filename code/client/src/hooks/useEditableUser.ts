@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 
 export const useEditableUser = (id: string) => {
     const isNewUser = id === "new";
-    const [originalUser, setOriginalUser] = useState<User>();
     const [user, setUser] = useState<Partial<User>>();
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
@@ -15,7 +14,6 @@ export const useEditableUser = (id: string) => {
             try {
                 const response = await fetch(`/api/users/${id}`);
                 const data = await response.json();
-                setOriginalUser(data);
                 setUser(data);
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -41,12 +39,7 @@ export const useEditableUser = (id: string) => {
                 body: JSON.stringify(user),
             });
             if (response.ok) {
-                setOriginalUser(user as User);
-                setIsEditing(false);
-                if (isNewUser) {
-                    const createdUser = await response.json();
-                    navigate(`/users/${createdUser.id}`);
-                }
+                navigate(`/`);
             } else {
                 console.error("Failed to save user data");
             }
@@ -55,10 +48,7 @@ export const useEditableUser = (id: string) => {
         }
     };
 
-    const handleCancel = () => {
-        setUser(originalUser);
-        setIsEditing(false);
-    };
+    const handleCancel = () => navigate(`/`);
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
         setUser({ ...user, [e.target.name]: e.target.value } as User);

@@ -86,6 +86,18 @@ const UserPage = () => {
                         required
                     />
                 </Grid2>
+                <Grid2 size={12}>
+                    <TextField
+                        fullWidth
+                        multiline
+                        rows={3}
+                        label="Notes"
+                        name="notes"
+                        value={user.notes}
+                        onChange={handleChange}
+                        disabled={!isEditing}
+                    />
+                </Grid2>
             </Grid2>
 
             <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 3 }}>

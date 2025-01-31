@@ -20,6 +20,7 @@ const run = async () => {
         user.lastName = req.body.lastName;
         user.age = req.body.age;
         user.phoneNumber = req.body.phoneNumber;
+        user.notes = req.body.notes;
         await userRepository.save(user);
         res.json(user);
     });
@@ -29,6 +30,7 @@ const run = async () => {
         user.lastName = req.body.lastName;
         user.age = req.body.age;
         user.phoneNumber = req.body.phoneNumber;
+        user.notes = req.body.notes;
         await userRepository.save(user);
         res.json(user);
     });
