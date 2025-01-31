@@ -1,36 +1,42 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { User } from "./types";
-import { UserRow } from "./user-row";
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { useUserList } from "./hooks/useUserList";
+import { useNavigate } from "react-router";
 
 export const Users: React.FC = () => {
-    const [users, setUsers] = useState<User[]>([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get("/api/users");
-            setUsers(result.data);
-        };
-        fetchData();
-    }, []);
+    const users = useUserList();
+    const navigate = useNavigate();    
     return (
-        <div className="w-full">
-            <h2 className="text-xl font-fold">Users</h2>
-            <table className="table-auto w-full">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
-                        <th>Phone Number</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <TableContainer component={Paper}>
+            <Typography variant="h5" sx={{ m: 2, fontWeight: "bold" }}>Users</Typography>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell sx={{fontWeight: 'bold'}}>First Name</TableCell>
+                        <TableCell sx={{fontWeight: 'bold'}}>Last Name</TableCell>
+                        <TableCell sx={{fontWeight: 'bold'}}>Age</TableCell>
+                        <TableCell sx={{fontWeight: 'bold'}}>Phone Number</TableCell>
+                        <TableCell sx={{fontWeight: 'bold'}}>Actions</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {users.map(user => (
-                        <UserRow user={user} key={user.id} />
+                        <TableRow key={user.id}>
+                            <TableCell>{user.firstName}</TableCell>
+                            <TableCell>{user.lastName}</TableCell>
+                            <TableCell>{user.age}</TableCell>
+                            <TableCell>{user.phoneNumber}</TableCell>
+                            <TableCell>
+                                <Button
+                                    variant="contained" 
+                                    color="primary"
+                                    size="small"
+                                    onClick={() => navigate(`/users/${user.id}`)}
+                                >View Profile</Button>
+                            </TableCell>
+                        </TableRow>
                     ))}
-                </tbody>
-            </table>
-        </div>
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 };
