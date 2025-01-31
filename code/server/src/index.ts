@@ -1,4 +1,4 @@
-import { AppDataSource } from "./data-source";
+import { AppDataSource, userRepository } from "./data-source";
 import { User } from "./entity/User";
 import * as express from "express";
 
@@ -7,8 +7,12 @@ const run = async () => {
     const app = express();
     app.use(express.json());
     app.get("/users", async (req, res) => {
-        const users = await AppDataSource.manager.getRepository(User).find();
+        const users = await userRepository.find();
         res.json(users);
+    });
+    app.get("/users/:id", async (req, res) => {
+        const user = await userRepository.findOne({where: {id: req.params.id}});
+        res.json(user);
     });
     app.post("/users", async (req, res) => {
         const user = new User();
@@ -16,18 +20,17 @@ const run = async () => {
         user.lastName = req.body.lastName;
         user.age = req.body.age;
         user.phoneNumber = req.body.phoneNumber;
-        await AppDataSource.manager.getRepository(User).save(user);
+        await userRepository.save(user);
         res.json(user);
     });
     app.put("/users/:id", async (req, res) => {
-        const user = await AppDataSource.manager
-            .getRepository(User)
+        const user = await userRepository
             .findOne({ where: { id: req.params.id } });
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
-        user.id = req.body.age;
+        user.age = req.body.age;
         user.phoneNumber = req.body.phoneNumber;
-        await AppDataSource.manager.getRepository(User).save(user);
+        await userRepository.save(user);
         res.json(user);
     });
     app.listen(3000, () => {

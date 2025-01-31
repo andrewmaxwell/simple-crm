@@ -11,3 +11,5 @@ export const AppDataSource = new DataSource({
     migrations: [],
     subscribers: [],
 });
+
+export const userRepository = AppDataSource.manager.getRepository(User);
