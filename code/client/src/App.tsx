@@ -1,11 +1,6 @@
-import { AddUser } from "./add-user";
+
 import { Users } from "./users";
 
-const App = () => (
-    <>
-        <Users />
-        <AddUser />
-    </>
-);
+const App = () => <Users />;
 
 export default App;

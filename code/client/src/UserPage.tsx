@@ -15,9 +15,8 @@ const UserPage = () => {
   }
 
   return (
-
       <Paper elevation={3} sx={{ p: 3 }}>
-        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}>
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
           User Profile
         </Typography>
 
@@ -30,6 +29,7 @@ const UserPage = () => {
               value={user.firstName}
               onChange={handleChange}
               disabled={!isEditing}
+              required
             />
           </Grid2>
           <Grid2 size={6}>
@@ -40,6 +40,7 @@ const UserPage = () => {
               value={user.lastName}
               onChange={handleChange}
               disabled={!isEditing}
+              required
             />
           </Grid2>
           <Grid2 size={6}>
@@ -51,16 +52,18 @@ const UserPage = () => {
               value={user.age}
               onChange={handleChange}
               disabled={!isEditing}
+              required
             />
           </Grid2>
           <Grid2 size={6}>
             <TextField
               fullWidth
               label="Phone Number"
-              name="phone"
+              name="phoneNumber"
               value={user.phoneNumber}
               onChange={handleChange}
               disabled={!isEditing}
+              required
             />
           </Grid2>
         </Grid2>
@@ -68,7 +71,7 @@ const UserPage = () => {
         <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 3 }}>
           {isEditing ? (
             <>
-              <Button variant="contained" color="success" onClick={handleSave}>
+              <Button variant="contained" color="success" onClick={handleSave} disabled={!user.firstName || !user.lastName || !user.age || !user.phoneNumber}>
                 Save
               </Button>
               <Button variant="outlined" color="error" onClick={handleCancel}>

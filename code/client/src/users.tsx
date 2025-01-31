@@ -1,4 +1,4 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useUserList } from "./hooks/useUserList";
 import { useNavigate } from "react-router";
 
@@ -7,7 +7,14 @@ export const Users: React.FC = () => {
     const navigate = useNavigate();    
     return (
         <TableContainer component={Paper}>
-            <Typography variant="h5" sx={{ m: 2, fontWeight: "bold" }}>Users</Typography>
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2 }}>
+                <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                    Users
+                </Typography>
+                <Button variant="contained" color="primary" sx={{mt: 2}} onClick={() => navigate("/users/new")}>
+                    Add User
+                </Button>
+            </Box>
             <Table>
                 <TableHead>
                     <TableRow>
