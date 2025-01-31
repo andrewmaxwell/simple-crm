@@ -8,10 +8,19 @@
   "scripts": {
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "update-graphql": "npm run update-graphql --workspaces --if-present"
+    "update-graphql": "npm run update-graphql --workspaces --if-present",
+    "lint": "eslint ."
   },
   "workspaces": [
     "code/client",
     "code/server"
-  ]
+  ],
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^15.14.0",
+    "typescript-eslint": "^8.22.0"
+  }
 }
