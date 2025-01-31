@@ -11,7 +11,7 @@ const run = async () => {
         res.json(users);
     });
     app.get("/users/:id", async (req, res) => {
-        const user = await userRepository.findOne({where: {id: req.params.id}});
+        const user = await userRepository.findOne({ where: { id: req.params.id } });
         res.json(user);
     });
     app.post("/users", async (req, res) => {
@@ -24,8 +24,7 @@ const run = async () => {
         res.json(user);
     });
     app.put("/users/:id", async (req, res) => {
-        const user = await userRepository
-            .findOne({ where: { id: req.params.id } });
+        const user = await userRepository.findOne({ where: { id: req.params.id } });
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
         user.age = req.body.age;

@@ -2,26 +2,31 @@ import { AppBar, Box, Container, CssBaseline, Toolbar, Typography } from "@mui/m
 import { Outlet, useNavigate } from "react-router";
 
 const Layout = () => {
-  const navigate = useNavigate();
-  return (
-    <Box>
-      <CssBaseline />
-      <AppBar position="fixed">
-        <Toolbar>
-          <Typography sx={{cursor: 'pointer'}} variant="h6" noWrap component="div" onClick={() => navigate("/")}>
-            Simple CRM
-          </Typography>
-        </Toolbar>
-      </AppBar>
-  
-      <Box component="main" sx={{ p: 3 }}>
-          <Toolbar />
-          <Container>
-            <Outlet />
-          </Container>
+    const navigate = useNavigate();
+    return (
+        <Box>
+            <CssBaseline />
+            <AppBar position="fixed">
+                <Toolbar>
+                    <Typography
+                        sx={{ cursor: "pointer" }}
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        onClick={() => navigate("/")}>
+                        Simple CRM
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+
+            <Box component="main" sx={{ p: 3 }}>
+                <Toolbar />
+                <Container>
+                    <Outlet />
+                </Container>
+            </Box>
         </Box>
-    </Box>
-  )
-}
+    );
+};
 
 export default Layout;

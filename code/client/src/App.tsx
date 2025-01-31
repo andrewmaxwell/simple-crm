@@ -1,4 +1,3 @@
-
 import { Users } from "./users";
 
 const App = () => <Users />;
