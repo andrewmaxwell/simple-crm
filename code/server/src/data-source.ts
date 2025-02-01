@@ -1,15 +1,17 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { User } from "./entity/User";
+import { Note } from "./entity/Note";
 
 export const AppDataSource = new DataSource({
     type: "sqlite",
     database: "database.sqlite",
     synchronize: true,
     logging: false,
-    entities: [User],
+    entities: [User, Note],
     migrations: [],
     subscribers: [],
 });
 
 export const userRepository = AppDataSource.manager.getRepository(User);
+export const noteRepository = AppDataSource.manager.getRepository(Note);

@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router";
 import { useEditableUser } from "./hooks/useEditableUser";
+import { Notes } from "./Notes";
 
 const UserPage = () => {
     const { id } = useParams();
@@ -28,107 +29,101 @@ const UserPage = () => {
 
     if (!user) {
         return (
-            <Typography variant="h6" color="error" textAlign="center">
+            <Typography variant="h6" color="error">
                 User not found
             </Typography>
         );
     }
 
     return (
-        <Paper elevation={3} sx={{ p: 3 }}>
-            <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
-                User Profile
-            </Typography>
+        <>
+            <Paper elevation={3} sx={{ p: 3 }}>
+                <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+                    User Profile
+                </Typography>
 
-            <Grid2 container spacing={2}>
-                <Grid2 size={6}>
-                    <TextField
-                        fullWidth
-                        label="First Name"
-                        name="firstName"
-                        value={user.firstName}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                        required
-                    />
+                <Grid2 container spacing={2}>
+                    <Grid2 size={6}>
+                        <TextField
+                            fullWidth
+                            label="First Name"
+                            name="firstName"
+                            value={user.firstName}
+                            onChange={handleChange}
+                            disabled={!isEditing}
+                            required
+                        />
+                    </Grid2>
+                    <Grid2 size={6}>
+                        <TextField
+                            fullWidth
+                            label="Last Name"
+                            name="lastName"
+                            value={user.lastName}
+                            onChange={handleChange}
+                            disabled={!isEditing}
+                            required
+                        />
+                    </Grid2>
+                    <Grid2 size={6}>
+                        <TextField
+                            fullWidth
+                            label="Age"
+                            name="age"
+                            type="number"
+                            value={user.age}
+                            onChange={handleChange}
+                            disabled={!isEditing}
+                            required
+                        />
+                    </Grid2>
+                    <Grid2 size={6}>
+                        <TextField
+                            fullWidth
+                            label="Phone Number"
+                            name="phoneNumber"
+                            value={user.phoneNumber}
+                            onChange={handleChange}
+                            disabled={!isEditing}
+                            required
+                        />
+                    </Grid2>
                 </Grid2>
-                <Grid2 size={6}>
-                    <TextField
-                        fullWidth
-                        label="Last Name"
-                        name="lastName"
-                        value={user.lastName}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                        required
-                    />
-                </Grid2>
-                <Grid2 size={6}>
-                    <TextField
-                        fullWidth
-                        label="Age"
-                        name="age"
-                        type="number"
-                        value={user.age}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                        required
-                    />
-                </Grid2>
-                <Grid2 size={6}>
-                    <TextField
-                        fullWidth
-                        label="Phone Number"
-                        name="phoneNumber"
-                        value={user.phoneNumber}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                        required
-                    />
-                </Grid2>
-                <Grid2 size={12}>
-                    <TextField
-                        fullWidth
-                        multiline
-                        rows={3}
-                        label="Notes"
-                        name="notes"
-                        value={user.notes}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
-                </Grid2>
-            </Grid2>
 
-            <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 3 }}>
-                {isEditing ? (
-                    <>
+                <Box sx={{ display: "flex", gap: 2, mt: 3 }}>
+                    {isEditing ? (
+                        <>
+                            <Button
+                                variant="contained"
+                                color="success"
+                                onClick={handleSave}
+                                disabled={
+                                    !user.firstName ||
+                                    !user.lastName ||
+                                    !user.age ||
+                                    !user.phoneNumber
+                                }>
+                                Save
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                color="error"
+                                onClick={handleCancel}>
+                                Cancel
+                            </Button>
+                        </>
+                    ) : (
                         <Button
                             variant="contained"
-                            color="success"
-                            onClick={handleSave}
-                            disabled={
-                                !user.firstName ||
-                                !user.lastName ||
-                                !user.age ||
-                                !user.phoneNumber
-                            }>
-                            Save
+                            color="primary"
+                            onClick={handleStartEditing}>
+                            Edit
                         </Button>
-                        <Button variant="outlined" color="error" onClick={handleCancel}>
-                            Cancel
-                        </Button>
-                    </>
-                ) : (
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleStartEditing}>
-                        Edit
-                    </Button>
-                )}
-            </Box>
-        </Paper>
+                    )}
+                </Box>
+            </Paper>
+            {id && <Notes userId={id} />}
+        </>
     );
 };
 

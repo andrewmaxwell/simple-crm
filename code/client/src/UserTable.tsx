@@ -24,7 +24,6 @@ export const UserTable: React.FC = () => {
                 sx={{
                     display: "flex",
                     justifyContent: "space-between",
-                    alignItems: "center",
                     p: 2,
                 }}>
                 <Typography variant="h5" sx={{ fontWeight: "bold" }}>
@@ -45,7 +44,6 @@ export const UserTable: React.FC = () => {
                         <TableCell sx={bold}>Last Name</TableCell>
                         <TableCell sx={bold}>Age</TableCell>
                         <TableCell sx={bold}>Phone Number</TableCell>
-                        <TableCell sx={bold}>Notes</TableCell>
                         <TableCell sx={bold}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
@@ -56,7 +54,6 @@ export const UserTable: React.FC = () => {
                             <TableCell>{user.lastName}</TableCell>
                             <TableCell>{user.age}</TableCell>
                             <TableCell>{user.phoneNumber}</TableCell>
-                            <TableCell>{user.notes}</TableCell>
                             <TableCell>
                                 <Button
                                     variant="contained"

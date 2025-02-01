@@ -1,4 +1,5 @@
-import { AppDataSource, userRepository } from "./data-source";
+import { AppDataSource, noteRepository, userRepository } from "./data-source";
+import { Note } from "./entity/Note";
 import { User } from "./entity/User";
 import * as express from "express";
 
@@ -20,7 +21,6 @@ const run = async () => {
         user.lastName = req.body.lastName;
         user.age = req.body.age;
         user.phoneNumber = req.body.phoneNumber;
-        user.notes = req.body.notes;
         await userRepository.save(user);
         res.json(user);
     });
@@ -30,9 +30,24 @@ const run = async () => {
         user.lastName = req.body.lastName;
         user.age = req.body.age;
         user.phoneNumber = req.body.phoneNumber;
-        user.notes = req.body.notes;
         await userRepository.save(user);
         res.json(user);
+    });
+    app.post("/notes", async (req, res) => {
+        const user = await userRepository.findOne({ where: { id: req.body.userId } });
+        const note = new Note();
+        note.text = req.body.text;
+        note.user = user;
+        note.timestamp = new Date();
+        await noteRepository.save(note);
+        res.json(note);
+    });
+    app.get("/users/:id/notes", async (req, res) => {
+        const notes = await noteRepository.find({
+            where: { user: { id: req.params.id } },
+            order: { timestamp: "DESC" },
+        });
+        res.json(notes);
     });
     app.listen(3000, () => {
         console.log("Server is running on http://localhost:3000");

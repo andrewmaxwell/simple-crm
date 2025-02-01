@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Note } from "./Note";
 
 @Entity()
 export class User {
@@ -17,6 +18,6 @@ export class User {
     @Column()
     phoneNumber: string;
 
-    @Column()
-    notes: string;
+    @OneToMany(() => Note, note => note.user, { cascade: true })
+    notes: Note[];
 }
