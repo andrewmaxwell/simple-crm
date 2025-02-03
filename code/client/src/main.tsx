@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
-import UserPage from "./UserPage.tsx";
-import Layout from "./Layout.tsx";
+import { UserPage } from "./UserPage.tsx";
+import { Layout } from "./Layout.tsx";
 import { UserTable } from "./UserTable.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

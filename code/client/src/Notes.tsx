@@ -4,19 +4,7 @@ import { useNotes } from "./hooks/useNotes";
 
 export const Notes = ({ userId }: { userId: string }) => {
     const [note, setNote] = useState("");
-    const { notes, loadNotes } = useNotes(userId);
-
-    const save = async () => {
-        const response = await fetch(`/api/notes`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text: note, userId }),
-        });
-        if (response.ok) {
-            setNote("");
-            loadNotes();
-        }
-    };
+    const { notes, saveNote } = useNotes(userId);
 
     return (
         <Box mt={2}>
@@ -26,10 +14,11 @@ export const Notes = ({ userId }: { userId: string }) => {
                 label="Add a Note (Shift+Enter to save)"
                 value={note}
                 onChange={e => setNote(e.target.value)}
-                onKeyDown={e => {
+                onKeyDown={async e => {
                     if (e.shiftKey && e.key === "Enter") {
                         e.preventDefault();
-                        save();
+                        await saveNote(note);
+                        setNote("");
                     }
                 }}
             />

@@ -1,7 +1,7 @@
 import { AppBar, Box, Container, CssBaseline, Toolbar, Typography } from "@mui/material";
 import { Outlet, useNavigate } from "react-router";
 
-const Layout = () => {
+export const Layout = () => {
     const navigate = useNavigate();
     return (
         <Box>
@@ -28,5 +28,3 @@ const Layout = () => {
         </Box>
     );
 };
-
-export default Layout;

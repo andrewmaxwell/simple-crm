@@ -11,6 +11,6 @@ export interface User {
 export interface Note {
     id: number;
     text: string;
-    timestamp: Date;
+    timestamp: string;
     user: User;
 }

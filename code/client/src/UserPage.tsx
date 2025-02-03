@@ -11,7 +11,7 @@ import { useParams } from "react-router";
 import { useEditableUser } from "./hooks/useEditableUser";
 import { Notes } from "./Notes";
 
-const UserPage = () => {
+export const UserPage = () => {
     const { id } = useParams();
     const {
         loading,
@@ -122,9 +122,7 @@ const UserPage = () => {
                     )}
                 </Box>
             </Paper>
-            {id && <Notes userId={id} />}
+            {id && id !== "new" && <Notes userId={id} />}
         </>
     );
 };
-
-export default UserPage;

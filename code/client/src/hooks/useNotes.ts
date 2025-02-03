@@ -9,9 +9,18 @@ export const useNotes = (userId: string) => {
         setNotes(await response.json());
     };
 
+    const saveNote = async (note: string) => {
+        await fetch(`/api/notes`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: note, userId }),
+        });
+        loadNotes();
+    };
+
     useEffect(() => {
         loadNotes();
     }, [userId]);
 
-    return { notes, loadNotes };
+    return { notes, saveNote };
 };
